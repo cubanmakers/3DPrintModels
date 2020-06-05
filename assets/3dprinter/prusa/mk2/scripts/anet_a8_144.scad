@@ -86,7 +86,7 @@ EB_UNKNOWN = [ "UNKNOWN", [0, 0, 0] ];
 function corner_bracket_for(profiletype) = (extrusion_width(profiletype) == 20)? E20_corner_bracket: EB_UNKNOWN;
 
 module corner_bracket_for_extrusion(profiletype) {
-    extrusion_corner_bracket(corner_bracket_for(profiletype));
+    extrusion_corner_bracket_assembly(corner_bracket_for(profiletype));
 }
 
 module anet_vframe_clamps(profiletype) {
