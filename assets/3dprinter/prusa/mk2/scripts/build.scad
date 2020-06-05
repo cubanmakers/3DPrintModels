@@ -13,24 +13,28 @@ module prusa() {
     }
 }
 
+// Reusable modules
+
 module prusa_frame_x() {
-        rotate(90, [0, 1, 0])
-        translate([0,0,156.5])
-        extrusion(E2040, 313, cornerHole=true);
+    rotate(90, [0, 1, 0])
+    translate([0,0,156.5])
+    extrusion(E2040, 313, cornerHole=true);
 }
 
 module prusa_frame_y() {
-        rotate(90, [0, 1, 0])
-        rotate(90, [-1, 0, 0])
-        translate([0,0,220])
-        extrusion(E2040, 440, cornerHole=true);
+    rotate(90, [0, 1, 0])
+    rotate(90, [-1, 0, 0])
+    translate([0,0,220])
+    extrusion(E2040, 440, cornerHole=true);
 }
 
 module prusa_frame_z() {
-        rotate(90, [0,0,1])
-        translate([0,0,170])
-        extrusion(E2040, 340, cornerHole=true);
+    rotate(90, [0,0,1])
+    translate([0,0,170])
+    extrusion(E2040, 340, cornerHole=true);
 }
+
+// Modules for printer parts
 
 module prusa_base() {
     translate([20, 0, 10])
@@ -42,6 +46,17 @@ module prusa_base() {
         prusa_frame_x();
         translate([20, 420, 0])
         prusa_frame_x();
+        translate([20, 40, 0])
+        extrusion_corner_bracket(E20_corner_bracket);
+        translate([330, 40, 0])
+        rotate(90, [0,0,1])
+        extrusion_corner_bracket(E20_corner_bracket);
+        translate([20, 400, 0])
+        rotate(-90, [0,0,1])
+        extrusion_corner_bracket(E20_corner_bracket);
+        translate([330, 400, 0])
+        rotate(180, [0,0,1])
+        extrusion_corner_bracket(E20_corner_bracket);
     }
 }
 
