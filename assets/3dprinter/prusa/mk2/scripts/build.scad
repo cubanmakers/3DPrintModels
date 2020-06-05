@@ -34,5 +34,4 @@ module prusa_axis_z() {
 
 if ($preview) {
     prusa();
-    //corner_bracket_for_extrusion(E2040);
 }

@@ -57,7 +57,7 @@ module anet_a8_base(size, profiletype) {
     }
 }
 
-module anet_a8_vframe(size, vframe_y, profiletype) {
+module anet_a8_vframe(size, profiletype) {
     profile_length = profile_lengths(size, profiletype);
     ext_h = extrusion_height(profiletype);
     ext_w = extrusion_width(profiletype);
@@ -89,31 +89,32 @@ module corner_bracket_for_extrusion(profiletype) {
     extrusion_corner_bracket(corner_bracket_for(profiletype));
 }
 
+module anet_vframe_clamps(profiletype) {
+    ext_h = extrusion_height(profiletype);
+    ext_w = extrusion_width(profiletype);
+    for (pos = [ext_w / 2: ext_w: ext_h]) {
+        translate([pos, 0, 0])
+        rotate(-90, [0,0,1])
+        rotate(90, [1,0,0])
+        corner_bracket_for_extrusion(profiletype);
+    }
+}
+
 module anet_a8_frame(printvol, profiletype=E2040) {
     // TODO: Compute size and vframe position out of printvol
     size = [393 , 440, 360];
-    vframe_y = 350;
+    vframe_y = 260;
     profile_length = profile_lengths(size, profiletype);
+    ext_h = extrusion_height(profiletype);
+    ext_w = extrusion_width(profiletype);
     union() {
         anet_a8_base(size, profiletype);
-        translate([0, 260, 20])
-        anet_a8_vframe(size, vframe_y, profiletype);
-        translate([10, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        corner_bracket_for_extrusion(profiletype);
-        translate([30, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        corner_bracket_for_extrusion(profiletype);
-        translate([360, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        corner_bracket_for_extrusion(profiletype);
-        translate([380, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        corner_bracket_for_extrusion(profiletype);
+        translate([0, vframe_y, ext_w])
+        anet_a8_vframe(size, profiletype);
+        translate([0, vframe_y, ext_w])
+        anet_vframe_clamps(profiletype);
+        translate([ext_h + profile_length[0], vframe_y, ext_w])
+        anet_vframe_clamps(profiletype);
     }
 }
 
