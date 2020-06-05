@@ -3,8 +3,12 @@
 // Copyright (c) 2020 Cuban.Tech
 
 include <anet_a8_144.scad>
+include <p35x70.scad>
 
-module prusa(printvol=[200,200,200], frametype="ANET_A8") {
+// 3D printer frame type
+frame = "ANET_A8";
+
+module prusa(printvol=[200,200,200], frametype=frame) {
     union() {
         prusa_frame(printvol, frametype);
         prusa_axis_x();
@@ -15,8 +19,9 @@ module prusa(printvol=[200,200,200], frametype="ANET_A8") {
 
 module prusa_frame(printvol, frametype) {
     if (frametype == "ANET_A8") {
-        // TODO: Correlation between printvol and printer size
         anet_a8_frame(printvol, E2040);
+    } else if (frametype == "P35X70") {
+        p35x70_frame(printvol);
     }
 }
 
