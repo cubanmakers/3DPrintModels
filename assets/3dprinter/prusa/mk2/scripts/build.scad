@@ -69,6 +69,13 @@ module prusa_vert() {
         translate([20, 0, 320])
         rotate(90, [1, 0, 0])
         prusa_frame_x();
+        translate([20, 0, 300])
+        rotate(-90, [1,0,0])
+        extrusion_corner_bracket(E20_corner_bracket);
+        translate([330, 0, 300])
+        rotate(90, [0,1,0])
+        rotate(-90, [1,0,0])
+        extrusion_corner_bracket(E20_corner_bracket);
     }
 }
 
