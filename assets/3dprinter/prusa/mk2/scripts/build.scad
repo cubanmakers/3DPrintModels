@@ -1,105 +1,22 @@
-// Parametric design of Prusa printers and alternatives
+// Parametric design of DIY Prusa 3D printer alternatives
 //
 // Copyright (c) 2020 Cuban.Tech
 
-include <NopSCADlib/lib.scad>
+include <anet_a8_144.scad>
 
-module prusa() {
+module prusa(printvol=[200,200,200], frametype="ANET_A8") {
     union() {
-        prusa_frame();
+        prusa_frame(printvol, frametype);
         prusa_axis_x();
         prusa_axis_y();
         prusa_axis_z();
     }
 }
 
-// Reusable modules
-
-module prusa_frame_x() {
-    rotate(90, [0, 1, 0])
-    translate([0,0,156.5])
-    extrusion(E2040, 313, cornerHole=true);
-}
-
-module prusa_frame_y() {
-    rotate(90, [0, 1, 0])
-    rotate(90, [-1, 0, 0])
-    translate([0,0,220])
-    extrusion(E2040, 440, cornerHole=true);
-}
-
-module prusa_frame_z() {
-    rotate(90, [0,0,1])
-    translate([0,0,170])
-    extrusion(E2040, 340, cornerHole=true);
-}
-
-// Modules for printer parts
-
-module prusa_base() {
-    translate([20, 0, 10])
-    union() {
-        prusa_frame_y();
-        translate([350, 0, 0])
-        prusa_frame_y();
-        translate([20, 20, 0])
-        prusa_frame_x();
-        translate([20, 420, 0])
-        prusa_frame_x();
-        translate([20, 40, 0])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([330, 40, 0])
-        rotate(90, [0,0,1])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([20, 400, 0])
-        rotate(-90, [0,0,1])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([330, 400, 0])
-        rotate(180, [0,0,1])
-        extrusion_corner_bracket(E20_corner_bracket);
-    }
-}
-
-module prusa_vert() {
-    translate([20, 10, 0])
-    union() {
-        prusa_frame_z();
-        translate([350, 0, 0])
-        prusa_frame_z(); 
-        translate([20, 0, 320])
-        rotate(90, [1, 0, 0])
-        prusa_frame_x();
-        translate([20, 0, 300])
-        rotate(-90, [1,0,0])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([330, 0, 300])
-        rotate(90, [0,1,0])
-        rotate(-90, [1,0,0])
-        extrusion_corner_bracket(E20_corner_bracket);
-    }
-}
-
-module prusa_frame() {
-    union() {
-        prusa_base();
-        translate([0, 260, 20])
-        prusa_vert();
-        translate([10, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([30, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([360, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        extrusion_corner_bracket(E20_corner_bracket);
-        translate([380, 260, 20])
-        rotate(-90, [0,0,1])
-        rotate(90, [1,0,0])
-        extrusion_corner_bracket(E20_corner_bracket);
+module prusa_frame(printvol, frametype) {
+    if (frametype == "ANET_A8") {
+        // TODO: Correlation between printvol and printer size
+        anet_a8_frame(printvol, E2040);
     }
 }
 
@@ -117,4 +34,5 @@ module prusa_axis_z() {
 
 if ($preview) {
     prusa();
+    //corner_bracket_for_extrusion(E2040);
 }
