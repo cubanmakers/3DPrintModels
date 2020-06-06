@@ -21,23 +21,23 @@ profile_type = "E2040";
 
 // TODO: Compute size and vframe position out of printvol
 // Return fixed values for ANET A8 200x200x200 printing volume
-function printer_size(printvol, frametype) = (frametype == "ANET_A8")? [393, 440, 360]: (
+function printer_size(printvol, frametype) = (frametype == "ANET_A8")? [393, 440, 360]:
                                              (frametype == "P35X70")?  [400, 520, 400]:
-                                             [200, 200, 200] );
+                                             [200, 200, 200];
 
-module prusa(printvol=[200,200,200], frametype=frame) {
+module prusa(printvol=[200,200,200], frametype=frame, profile_name="") {
     size = printer_size(printvol, frametype);
     union() {
-        prusa_frame(size, frametype);
+        prusa_frame(size, frametype, profile_name);
         prusa_axis_x();
         prusa_axis_y();
         prusa_axis_z();
     }
 }
 
-module prusa_frame(printvol, frametype) {
+module prusa_frame(printvol, frametype, profile_name="") {
     if (frametype == "ANET_A8") {
-        anet_a8_frame(printvol, E2040);
+        anet_a8_frame(printvol, extrusion_by_name(profile_name));
     } else if (frametype == "P35X70") {
         p35x70_frame(printvol);
     }
@@ -88,7 +88,7 @@ module prusa_extrusion_z(printer_size, frame_type) {
 module prusa_main() {
     printvol = [printvol_x, printvol_y, printvol_z];
     size = printer_size(printvol, frame);
-    if (part == "printer") { prusa(size, frame); }
+    if (part == "printer") { prusa(size, frame, profile_type); }
     else if (part == "extrusion_x") { prusa_extrusion_x(size, frame); }
     else if (part == "extrusion_y") { prusa_extrusion_y(size, frame); }
     else if (part == "extrusion_z") { prusa_extrusion_z(size, frame); }
