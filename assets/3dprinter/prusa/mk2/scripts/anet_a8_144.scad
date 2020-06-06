@@ -39,7 +39,7 @@ module anet_a8_base(size, profiletype) {
         anet_a8_profile_y(profile_length[1], profiletype);
         translate([profile_length[0] + ext_h, 0, 0])
         anet_a8_profile_y(profile_length[1], profiletype);
-        translate([ext_h / 2, 20, 0])
+        translate([ext_h / 2, ext_h / 2, 0])
         anet_a8_profile_x(profile_length[0], profiletype);
         translate([ext_h / 2, profile_length[1] - ext_h / 2, 0])
         anet_a8_profile_x(profile_length[0], profiletype);
