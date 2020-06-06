@@ -27,10 +27,10 @@ module anet_a8_profile_z(length, profiletype) {
 
 // Modules for printer parts
 
-function profile_lengths(size, profiletype) = [size[0] - 2 * extrusion_height(profiletype), size[1], size[2] - extrusion_width(profiletype)];
+function anet_a8_profile_lengths(size, profiletype) = [size[0] - 2 * extrusion_height(profiletype), size[1], size[2] - extrusion_width(profiletype)];
 
 module anet_a8_base(size, profiletype) {
-    profile_length = profile_lengths(size, profiletype);
+    profile_length = anet_a8_profile_lengths(size, profiletype);
     ext_h = extrusion_height(profiletype);
     ext_w = extrusion_width(profiletype);
     echo("Profile lengths", profile_length[0], profile_length[1], profile_length[2]);
@@ -58,7 +58,7 @@ module anet_a8_base(size, profiletype) {
 }
 
 module anet_a8_vframe(size, profiletype) {
-    profile_length = profile_lengths(size, profiletype);
+    profile_length = anet_a8_profile_lengths(size, profiletype);
     ext_h = extrusion_height(profiletype);
     ext_w = extrusion_width(profiletype);
     hprofile_z = ext_w + profile_length[2] - ext_h;
@@ -100,11 +100,9 @@ module anet_vframe_clamps(profiletype) {
     }
 }
 
-module anet_a8_frame(printvol, profiletype=E2040) {
-    // TODO: Compute size and vframe position out of printvol
-    size = [393 , 440, 360];
+module anet_a8_frame(size, profiletype=E2040) {
     vframe_y = 260;
-    profile_length = profile_lengths(size, profiletype);
+    profile_length = anet_a8_profile_lengths(size, profiletype);
     ext_h = extrusion_height(profiletype);
     ext_w = extrusion_width(profiletype);
     union() {

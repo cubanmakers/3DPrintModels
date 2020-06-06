@@ -4,7 +4,19 @@ use <../../../../../assets/extrusions/square/scripts/build.scad>
 /* translate = position on plane */
 /* perfil_h = size of profiles */
 
-module p35x70_frame(printvol) {
+module p35x70_profile_x(length) {
+    rotate(90, [0, 1, 0]) perfil_h(40, 70, length, 3);// X axis frame
+}
+
+module p35x70_profile_y(length) {
+    rotate(-90, [1,0,0]) perfil_h(40, 70, length, 3) ;// Y axis frame
+}
+
+module p35x70_profile_z(length) {
+    perfil_h(70, 40, length, 3);// Z axis frame
+}
+
+module p35x70_frame(size) {
     vframe_y = 297;
 
     // TODO: Parameterize size according to print volume
