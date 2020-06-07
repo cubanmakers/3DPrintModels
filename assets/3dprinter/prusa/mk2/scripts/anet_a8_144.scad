@@ -57,11 +57,11 @@ module anet_a8_base(size, profiletype) {
     }
 }
 
-module anet_a8_vframe(size, profiletype) {
+module anet_a8_arc(size, profiletype) {
     profile_length = anet_a8_profile_lengths(size, profiletype);
     ext_h = extrusion_height(profiletype);
     ext_w = extrusion_width(profiletype);
-    hprofile_z = ext_w + profile_length[2] - ext_h;
+    hprofile_z = profile_length[2] - ext_h / 2;
     cb_z = hprofile_z - ext_h / 2;
     translate([ext_h / 2, ext_w / 2, 0])
     union() {
@@ -89,7 +89,7 @@ module corner_bracket_for_extrusion(profiletype) {
     extrusion_corner_bracket_assembly(corner_bracket_for(profiletype));
 }
 
-module anet_vframe_clamps(profiletype) {
+module anet_a8_arc_clamps(profiletype) {
     ext_h = extrusion_height(profiletype);
     ext_w = extrusion_width(profiletype);
     for (pos = [ext_w / 2: ext_w: ext_h]) {
@@ -108,11 +108,11 @@ module anet_a8_frame(size, profiletype=E2040) {
     union() {
         anet_a8_base(size, profiletype);
         translate([0, vframe_y, ext_w])
-        anet_a8_vframe(size, profiletype);
+        anet_a8_arc(size, profiletype);
         translate([0, vframe_y, ext_w])
-        anet_vframe_clamps(profiletype);
+        anet_a8_arc_clamps(profiletype);
         translate([ext_h + profile_length[0], vframe_y, ext_w])
-        anet_vframe_clamps(profiletype);
+        anet_a8_arc_clamps(profiletype);
     }
 }
 
