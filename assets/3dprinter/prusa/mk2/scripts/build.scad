@@ -95,7 +95,12 @@ module prusa_extrusion_z(printer_size, frame_type) {
 
 module prusa_arc(size, frame_type) {
     if (frame_type == "ANET_A8") { anet_a8_arc(size, extrusion_by_name(profile_type)); }
-    else if (frame == "P35X70") { p35x70_arc(size); }
+    else if (frame_type == "P35X70") { p35x70_arc(size); }
+}
+
+module prusa_base(size, frame_type) {
+    if (frame_type == "ANET_A8") { anet_a8_base(size, extrusion_by_name(profile_type)); }
+    else if (frame_type == "P35X70") { p35x70_base(size); }
 }
 
 module prusa_main() {
@@ -105,7 +110,8 @@ module prusa_main() {
     else if (part == "extrusion_x") { prusa_extrusion_x(size, frame); }
     else if (part == "extrusion_y") { prusa_extrusion_y(size, frame); }
     else if (part == "extrusion_z") { prusa_extrusion_z(size, frame); }
-    else if (part == "arc") { prusa_arc(size, extrusion_by_name(profile_type)); }
+    else if (part == "arc") { prusa_arc(size, frame); }
+    else if (part == "base") { prusa_base(size, frame); }
 }
 
 if ($preview) {
