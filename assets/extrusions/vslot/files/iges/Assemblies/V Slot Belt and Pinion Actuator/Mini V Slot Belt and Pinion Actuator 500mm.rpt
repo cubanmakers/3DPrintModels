@@ -1,0 +1,68 @@
+*****************************************************************
+      SolidWorks Corporation - IGES Processor Status Report
+*****************************************************************
+=================================================================
+General Information
+=================================================================
+Sending System Product I.D.  : Mini V Slot Belt and Pinion Actuator 500mm
+Receiving System Product I.D.: Mini V Slot Belt and Pinion Actuator 500mm
+File Name                    : C:\Users\Rob\Documents\Solidworks\Open Builds\SW2014\Assemblies\V Slot Belt and Pinion Actuator\Mini V Slot Belt and Pinion Actuator 500mm.igs
+Sending System               : SolidWorks 2014
+Preprocessor Version         : SolidWorks 2014
+File Creation Date           : 150820.124322
+Model Creation Date          : 150820.124322
+Units                        : MM
+Model Space Scale            : 1
+Author                       : Rob
+Organization                 : 
+
+
+=================================================================
+Entity Processing Information
+=================================================================
+
+
+=================================================================
+Precision analysis of IGES file:
+=================================================================
+  Most prevalent number of significant digits:               3
+  Highest number of significant digits:                     11
+  Average number of significant digits:                 4.6069
+  Maximum distance to origin:                          1028.19
+  Minimum distance to origin:                              2.5
+  Effective number of significant digits:              10.9979
+
+
+=================================================================
+Entity Summary
+=================================================================
+-----------------------------------------------------------------
+Type Name                                         Count Converted
+---- ----                                         ----- ---------
+100  Arc                                            896       896
+102  Composite curve                               1508      1508
+110  Line                                          2772      2772
+120  Surface of revolution                          262       262
+124  Transformation matrix                          752       752
+126  Rational B-spline curve                       3516      3516
+128  Rational B-spline surface                      392       392
+142  Curve on a parametric surface                  754       754
+144  Trimmed parametric surface                     654       654
+308  Subfigure definition                            21        21
+314  Color definition                                25        25
+408  Singular subfigure instance                     70        70
+_________________________________________________________________
+
+
+=================================================================
+Result Summary
+=================================================================
+SolidWorks Feature Type                Count
+-----------------------                -----
+Solid feature(s)                       21
+Surface feature(s)                     0
+Curve/Sketch feature(s)                0
+--------------------------------------------
+Start time: Thursday, August 20, 2015 13:02:11
+Finish time: Thursday, August 20, 2015 13:02:19
+Processing time: 0 days, 00 hours, 00 mins, 08 secs
