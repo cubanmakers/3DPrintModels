@@ -1,0 +1,92 @@
+<DtkApiVersion>144<\DtkApiVersion>
+Process Conversion with healing
+    -------------
+    Reading Model : C:/Users/nealbert/AppData/Local/Temp/M1000.stp
+    -------------
+
+    Reading STEP file : C:/Users/nealbert/AppData/Local/Temp/M1000.stp
+
+    STEP Header Information
+
+  Description      Alibre Inc.
+  Imp_Level        2;1
+  File_Name        export0
+  Date             2016-05-27T18:13:10-05:00
+  Author           
+  Organization     
+  Pre_Version      ST-DEVELOPER v14
+  Orig_System      Alibre
+  Authorisation    
+  Schema_ID        AUTOMOTIVE_DESIGN
+
+	__________________________________________
+	ENTITY LIST
+	__________________________________________
+	Count			 Entity Type
+	__________________________________________
+	     1		ADVANCED_BREP_SHAPE_REPRESENTATION
+	    78		ADVANCED_FACE
+	     1		APPLICATION_CONTEXT
+	     1		APPLICATION_PROTOCOL_DEFINITION
+	    86		AXIS2_PLACEMENT_3D
+	   459		CARTESIAN_POINT
+	     8		CIRCLE
+	     1		CLOSED_SHELL
+	     1		COLOUR_RGB
+	     4		CYLINDRICAL_SURFACE
+	     2		DERIVED_UNIT
+	     2		DERIVED_UNIT_ELEMENT
+	   318		DIRECTION
+	   228		EDGE_CURVE
+	    88		EDGE_LOOP
+	    88		FACE_BOUND
+	     1		FILL_AREA_STYLE
+	     1		FILL_AREA_STYLE_COLOUR
+	     1		GEOMETRIC_REPRESENTATION_CONTEXT,GLOBAL_UNCERTAINTY_ASSIGNED_CONTEXT,GLOBAL_UNIT_ASSIGNED_CONTEXT,REPRESENTATION_CONTEXT
+	     1		LENGTH_UNIT,NAMED_UNIT,SI_UNIT
+	   220		LINE
+	     1		MANIFOLD_SOLID_BREP
+	     2		MEASURE_REPRESENTATION_ITEM
+	     1		MECHANICAL_DESIGN_GEOMETRIC_PRESENTATION_REPRESENTATION
+	     1		NAMED_UNIT,PLANE_ANGLE_UNIT,SI_UNIT
+	     1		NAMED_UNIT,SI_UNIT,SOLID_ANGLE_UNIT
+	   456		ORIENTED_EDGE
+	    74		PLANE
+	     1		PRESENTATION_STYLE_ASSIGNMENT
+	     1		PRODUCT
+	     1		PRODUCT_CONTEXT
+	     1		PRODUCT_DEFINITION
+	     1		PRODUCT_DEFINITION_CONTEXT
+	     1		PRODUCT_DEFINITION_FORMATION_WITH_SPECIFIED_SOURCE
+	     1		PRODUCT_DEFINITION_SHAPE
+	     1		PRODUCT_RELATED_PRODUCT_CATEGORY
+	     3		PROPERTY_DEFINITION
+	     3		PROPERTY_DEFINITION_REPRESENTATION
+	     3		REPRESENTATION
+	     1		SHAPE_DEFINITION_REPRESENTATION
+	     1		STYLED_ITEM
+	     1		SURFACE_SIDE_STYLE
+	     1		SURFACE_STYLE_FILL_AREA
+	     1		SURFACE_STYLE_USAGE
+	     1		UNCERTAINTY_MEASURE_WITH_UNIT
+	   220		VECTOR
+	   152		VERTEX_POINT
+	__________________________________________
+	  2521		TOTAL 
+	__________________________________________
+
+    Summary of Model : C:/Users/nealbert/AppData/Local/Temp/M1000.stp
+    ---------------
+  Model Structure   : SINGLE_PART
+  File Organization : MONOLITHIC
+    ---------------
+<FileName>C:/Users/nealbert/AppData/Local/Temp/M1000.stp<\FileName>
+<UnitScale>10<\UnitScale>
+
+
+
+Start Conversion     :   18:13:10 
+End Conversion       :   18:13:11 
+Conversion started during         :  1sec 
+
+File saving OK!
