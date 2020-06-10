@@ -99,6 +99,10 @@ module rotate_axis(reference, destination) {
     rotate(angle, axis) children();
 }
 
+module clone_at(positions) {
+    for (pos = positions) translate(pos) children();
+}
+
 // Connects two (vertical) octanorm profiles via a sidebar given reference to profile symmetry axis
 module octanorm_connect(v1, v2) {
     dir = v2 - v1;
@@ -126,29 +130,26 @@ module octanorm_connect_profile(v1, v2) {
 }
 
 module corexy_octanorm_frame(size, use_sidebar=true) {
-    profile_l1 = [radius(), radius(), size[2]];
-    profile_l2 = [radius(), size[1] - radius(), size[2]];
-    profile_r1 = [size[0] - radius(), radius(), size[2]];
-    profile_r2 = [size[0] - radius(), size[1] - radius(), size[2]];
+    profile_positions = [
+        [radius(), radius(), 0],
+        [radius(), size[1] - radius(), 0],
+        [size[0] - radius(), radius(), 0],
+        [size[0] - radius(), size[1] - radius(), 0]
+    ];
     union() {
-        translate([radius(), radius(), 0])
+        clone_at(profile_positions)
         octanorm_profile(size[2]);
-        translate([size[0] - radius(), radius(), 0])
-        octanorm_profile(size[2]);
-        translate([radius(), size[1] - radius(), 0])
-        octanorm_profile(size[2]);
-        translate([size[0] - radius(), size[1] - radius(), 0])
-        octanorm_profile(size[2]);
+        clone_at([[0, 0, octanorm_sidebar_height()], [0, 0, size[2]]])
         if (use_sidebar) {
-            octanorm_connect_sidebar(profile_l1, profile_l2);
-            octanorm_connect_sidebar(profile_r2, profile_l2);
-            octanorm_connect_sidebar(profile_r1, profile_r2);
-            octanorm_connect_sidebar(profile_r1, profile_l1);
+            octanorm_connect_sidebar(profile_positions[0], profile_positions[1]);
+            octanorm_connect_sidebar(profile_positions[1], profile_positions[3]);
+            octanorm_connect_sidebar(profile_positions[2], profile_positions[3]);
+            octanorm_connect_sidebar(profile_positions[2], profile_positions[0]);
         } else {
-            octanorm_connect_profile(profile_l1, profile_l2);
-            octanorm_connect_profile(profile_r2, profile_l2);
-            octanorm_connect_profile(profile_r1, profile_r2);
-            octanorm_connect_profile(profile_r1, profile_l1);
+            octanorm_connect_profile(profile_positions[0], profile_positions[1]);
+            octanorm_connect_profile(profile_positions[1], profile_positions[3]);
+            octanorm_connect_profile(profile_positions[2], profile_positions[3]);
+            octanorm_connect_profile(profile_positions[2], profile_positions[0]);
         }
     }
 }
