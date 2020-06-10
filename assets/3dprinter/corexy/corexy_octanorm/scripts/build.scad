@@ -16,6 +16,8 @@ printvol_y = 200;
 printvol_z = 230;
 // Profile type, in case mulitiple options available for frame
 profile_type = "E2020";
+// Use sidebar
+use_sidebar = true;
 
 function inch_to_mm(l) = 25.4 * l;
 function radius() = inch_to_mm(1);
@@ -121,7 +123,7 @@ module octanorm_connect_profile(v1, v2) {
     octanorm_profile(length);
 }
 
-module corexy_octanorm_frame(size) {
+module corexy_octanorm_frame(size, use_sidebar=true) {
     profile_l1 = [radius(), radius(), size[2]];
     profile_l2 = [radius(), size[1] - radius(), size[2]];
     profile_r1 = [size[0] - radius(), radius(), size[2]];
@@ -135,26 +137,29 @@ module corexy_octanorm_frame(size) {
         octanorm_profile(size[2]);
         translate([size[0] - radius(), size[1] - radius(), 0])
         octanorm_profile(size[2]);
-        octanorm_connect_sidebar(profile_l1, profile_l2);
-        octanorm_connect_sidebar(profile_r2, profile_l2);
-        octanorm_connect_sidebar(profile_r1, profile_r2);
-        octanorm_connect_sidebar(profile_r1, profile_l1);
-//        octanorm_connect_profile(profile_l1, profile_l2);
-//        octanorm_connect_profile(profile_r2, profile_l2);
-//        octanorm_connect_profile(profile_r1, profile_r2);
-//        octanorm_connect_profile(profile_r1, profile_l1);
+        if (use_sidebar) {
+            octanorm_connect_sidebar(profile_l1, profile_l2);
+            octanorm_connect_sidebar(profile_r2, profile_l2);
+            octanorm_connect_sidebar(profile_r1, profile_r2);
+            octanorm_connect_sidebar(profile_r1, profile_l1);
+        } else {
+            octanorm_connect_profile(profile_l1, profile_l2);
+            octanorm_connect_profile(profile_r2, profile_l2);
+            octanorm_connect_profile(profile_r1, profile_r2);
+            octanorm_connect_profile(profile_r1, profile_l1);
         }
+    }
 }
 
-module corexy_octanorm(printvol) {
+module corexy_octanorm(printvol, use_sidebar=true) {
     size = printer_size(printvol);
-    corexy_octanorm_frame(size);
+    corexy_octanorm_frame(size, use_sidebar);
 }
 
 module corexy_octanorm_main() {
     printvol = [printvol_x, printvol_y, printvol_z];
     size = printer_size(printvol, frame);
-    if (part == "printer") { corexy_octanorm(size); }
+    if (part == "printer") { corexy_octanorm(size, use_sidebar); }
     else if (part == "extrusion_x") { corexy_octanorm_frame_extrusion_x(size, frame); }
     else if (part == "extrusion_y") { corexy_octanorm_frame_extrusion_y(size, frame); }
     else if (part == "extrusion_z") { corexy_octanorm_frame_extrusion_z(size, frame); }
