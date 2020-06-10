@@ -108,17 +108,19 @@ module octanorm_connect(v1, v2) {
     children();
 }
 
+function octanorm_sidebar_height() = inch_to_mm(2.5);
+
 module octanorm_connect_sidebar(v1, v2) {
     dir = v2 - v1;
     length = norm(dir) - 2 * radius();
-    octanorm_connect(v1 - [0, 0, 40], v2 - [0, 0, 40])
+    octanorm_connect(v1 - [0, 0, octanorm_sidebar_height() / 2], v2 - [0, 0, octanorm_sidebar_height() / 2])
     octanorm_sidebar(length);
 }
 
 module octanorm_connect_profile(v1, v2) {
     dir = v2 - v1;
     length = norm(dir) - 2 * radius();
-    octanorm_connect(v1 - [0, 0, 40], v2 - [0, 0, 40])
+    octanorm_connect(v1 - [0, 0, radius()], v2 - [0, 0, radius()])
     rotate(-90, [1, 0, 0])
     octanorm_profile(length);
 }
@@ -171,4 +173,3 @@ module corexy_octanorm_main() {
 if ($preview) {
     corexy_octanorm_main();
 }
-corexy_octanorm_main();
