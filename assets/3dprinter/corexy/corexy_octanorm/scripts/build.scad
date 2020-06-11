@@ -113,6 +113,7 @@ module octanorm_connect(v1, v2) {
 }
 
 function octanorm_sidebar_height() = inch_to_mm(2.5);
+function octanorm_sidebar_width() = inch_to_mm(1);
 
 module octanorm_connect_sidebar(v1, v2) {
     dir = v2 - v1;
@@ -129,13 +130,7 @@ module octanorm_connect_profile(v1, v2) {
     octanorm_profile(length);
 }
 
-module corexy_octanorm_frame(size, use_sidebar=true) {
-    profile_positions = [
-        [radius(), radius(), 0],
-        [radius(), size[1] - radius(), 0],
-        [size[0] - radius(), radius(), 0],
-        [size[0] - radius(), size[1] - radius(), 0]
-    ];
+module corexy_octanorm_frame(size, profile_positions, use_sidebar=true) {
     union() {
         clone_at(profile_positions)
         octanorm_profile(size[2]);
@@ -154,21 +149,43 @@ module corexy_octanorm_frame(size, use_sidebar=true) {
     }
 }
 
-module corexy_octanorm(printvol, use_sidebar=true) {
+module corexy_octanorm_belt_system(size, profile_positions) {
+    // TODO: Parameterize or compute based on geometry
+    motor_pos_offset = inch_to_mm(4);
+    belt_frame_spacing = 10;
+
+    offset_x = octanorm_sidebar_width() / 2 + belt_frame_spacing + pulley_extent(GT2x12_pulley);
+    offset_z = size[2] - octanorm_sidebar_height() / 2;
+    motor_positions = [profile_positions[0] + [offset_x, radius() + motor_pos_offset, offset_z], profile_positions[1] + [offset_x, - radius() - motor_pos_offset, offset_z]];
+    echo("Motors at", motor_positions);
+    union() {
+        clone_at(motor_positions) NEMA(NEMA17S);
+        clone_at([for (motor_pos = motor_positions) motor_pos + [0, 0, NEMA_shaft_length(NEMA17S) - pulley_hub_length(GT2x12_pulley)] ]) pulley_assembly(GT2x12_pulley);
+    }
+}
+
+module corexy_octanorm(printvol, use_sidebar=true, motor_pos_offset=10) {
     size = printer_size(printvol);
-    corexy_octanorm_frame(size, use_sidebar);
+    profile_positions = [
+        [radius(), radius(), 0],
+        [radius(), size[1] - radius(), 0],
+        [size[0] - radius(), radius(), 0],
+        [size[0] - radius(), size[1] - radius(), 0]
+    ];
+    corexy_octanorm_frame(size, profile_positions, use_sidebar);
+    corexy_octanorm_belt_system(size, profile_positions);
 }
 
 module corexy_octanorm_main() {
     printvol = [printvol_x, printvol_y, printvol_z];
     size = printer_size(printvol, frame);
-    if (part == "printer") { corexy_octanorm(size, use_sidebar); }
+    if (part == "printer") { corexy_octanorm(printvol, use_sidebar); }
     else if (part == "extrusion_x") { corexy_octanorm_frame_extrusion_x(size, frame); }
     else if (part == "extrusion_y") { corexy_octanorm_frame_extrusion_y(size, frame); }
     else if (part == "extrusion_z") { corexy_octanorm_frame_extrusion_z(size, frame); }
     else if (part == "arc") { corexy_octanorm_frame_arc(size, frame); }
     else if (part == "base") { corexy_octanorm_frame_base(size, frame); }
-    else if (part == "frame") { corexy_octanorm_frame_frame(size, frame); }
+    else if (part == "frame") { corexy_octanorm_frame(size, frame); }
 }
 
 if ($preview) {
