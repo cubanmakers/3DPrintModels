@@ -113,7 +113,7 @@ module octanorm_connect(v1, v2) {
 }
 
 function octanorm_sidebar_height() = inch_to_mm(2.5);
-function octanorm_sidebar_width() = inch_to_mm(1);
+function octanorm_sidebar_width() = inch_to_mm(1.6);
 
 module octanorm_connect_sidebar(v1, v2) {
     dir = v2 - v1;
@@ -149,18 +149,31 @@ module corexy_octanorm_frame(size, profile_positions, use_sidebar=true) {
     }
 }
 
+SQRT_2 = 1.4142135623730951;
+
+module motor_with_pulley(motor_type, pulley_type) {
+    union() {
+        NEMA(motor_type);
+        translate([0, 0, NEMA_shaft_length(NEMA17S) - pulley_hub_length(GT2x12_pulley)])
+        pulley_assembly(pulley_type);
+    }
+}
+
 module corexy_octanorm_belt_system(size, profile_positions) {
     // TODO: Parameterize or compute based on geometry
     motor_pos_offset = inch_to_mm(4);
-    belt_frame_spacing = 10;
+    motor_frame_spacing = 10;
+    motor_type = NEMA17S;
+    pulley_type = GT2x12_pulley;
 
-    offset_x = octanorm_sidebar_width() / 2 + belt_frame_spacing + pulley_extent(GT2x12_pulley);
-    offset_z = size[2] - octanorm_sidebar_height() / 2;
+    offset_x = octanorm_sidebar_width() / 2 + motor_frame_spacing + pulley_extent(GT2x12_pulley);
+    offset_z = size[2];
     motor_positions = [profile_positions[0] + [offset_x, radius() + motor_pos_offset, offset_z], profile_positions[1] + [offset_x, - radius() - motor_pos_offset, offset_z]];
-    echo("Motors at", motor_positions);
+//    idler_positions = [[pulley_positions[0][0], ] ]
     union() {
-        clone_at(motor_positions) NEMA(NEMA17S);
-        clone_at([for (motor_pos = motor_positions) motor_pos + [0, 0, NEMA_shaft_length(NEMA17S) - pulley_hub_length(GT2x12_pulley)] ]) pulley_assembly(GT2x12_pulley);
+        clone_at(motor_positions)
+        rotate(180, [0, 1, 0])
+        motor_with_pulley(motor_type, pulley_type);
     }
 }
 
