@@ -10,10 +10,7 @@ module octanorm_extrusion(extrusion, length=undef) {
     if (l > length) echo("Requested octanorm extrusion length overflows part dimensions");
     color("grey")
     linear_extrude(l)
-    intersection() {
-        import(str("../files/cad/", extrusion[1], ".dxf"));
-        square([octanorm_extrusion_width(extrusion), octanorm_extrusion_height(extrusion)], center=true);
-    }
+    import(str("../files/cad/", extrusion[1], ".dxf"), layer = "Profil");
 }
 
 function octanorm_extrusion_width(extrusion) = extrusion[2];
@@ -24,4 +21,3 @@ if ($preview) {
     layout([for (e = octanorm_extrusions) octanorm_extrusion_height(e)], 10)
         octanorm_extrusion(octanorm_extrusions[$i], 80);
 }
-
