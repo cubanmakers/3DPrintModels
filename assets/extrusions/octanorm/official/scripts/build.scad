@@ -18,6 +18,6 @@ function octanorm_extrusion_height(extrusion) = extrusion[3];
 function octanorm_extrusion_length(extrusion) = extrusion[4];
 
 if ($preview) {
-    layout([for (e = octanorm_extrusions) octanorm_extrusion_height(e)], 10)
+    layout([for (e = octanorm_extrusions) octanorm_extrusion_height(e)], 40)
         octanorm_extrusion(octanorm_extrusions[$i], 80);
 }
