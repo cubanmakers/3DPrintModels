@@ -36,14 +36,6 @@ module upright(extrusion_type, length=undef) {
     extrusion_from_file(extrusion_type[EXTIDX_DXF_PATH], l, extrusion_type[EXTIDX_DXF_LAYER]);
 }
 
-// [0] = extrusion system (e.g. octanorm, vslot, ...)
-EXTIDX_SYSTEM = 0;
-// [1] = model set (empty for official design files)
-EXTIDX_SET = 1;
-// [2] = part name
-EXTIDX_PART = 2;
-// [3] = reference part name for extrusion section, in case of alternate configurations
-EXTIDX_REF = 3;
 function extrusion_origin(extrusion)      = [extrusion[EXTIDX_SYSTEM], extrusion[EXTIDX_SET]];
 function extrusion_part(extrusion)        = extrusion[EXTIDX_PART];
 function extrusion_refpart(extrusion)     = extrusion[EXTIDX_REF];
