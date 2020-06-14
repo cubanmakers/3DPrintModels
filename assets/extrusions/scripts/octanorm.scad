@@ -44,7 +44,10 @@ M226 = ["octanorm", "maxima120", "M226", "M225", "../octanorm/official/files/cad
 M230 = ["octanorm", "maxima120", "M230", "",   "../octanorm/official/files/cad/M 230.dxf", "Profil", 120, 120, 5000];
 
 // MAXIMA system round extrusions
-M1000 = ["octanorm", "maxima80", "M1222", "",   "../octanorm/official/files/cad/M 1222.dxf", "Profil", 80, 80, 5000];
+M1222 = ["octanorm", "maxima80", "M1222", "",   "../octanorm/official/files/cad/M 1222.dxf", "Profil", 80, 80, 5000];
+
+// MAXIMA system fla truss beams extrusions
+M770 = ["octanorm", "maxima40", "M770", "",   "../octanorm/official/files/cad/M 770.dxf", "Profil", 200, 40, 7000];
 
 // Classic system end caps
 //                    F   W   H     L  E        
@@ -57,5 +60,5 @@ S333 = ["S333", "S 330", 28,  28,  17, ["S308"]];
 // S340 = ["S340", "S 340", 8,  20,  80, ["S308"], M4];
 // S340 = ["S333", "S 333", 8,  20,  80, ["S308"], M4];
 
-octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230];
+octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770];
 
