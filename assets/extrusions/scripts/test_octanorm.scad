@@ -26,17 +26,19 @@ module test_octanorm() {
     maxima60_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima60") e];
     maxima80_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima80") e];
     maxima120_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima120") e];
+    maxima160_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima160") e];
     union() {
-    layout_extrusions(classic20_extrusions, 0);
-    layout_extrusions(classic28_extrusions, 90);
-    layout_extrusions(classic32_extrusions, 160);
-    layout_extrusions(classic35_extrusions, 240);
-    layout_extrusions(classic40_extrusions, 320);
-    layout_extrusions(classic80_extrusions, 400);
-    layout_extrusions(maxima40_extrusions, 480);
-    layout_extrusions(maxima60_extrusions, 560);
-    layout_extrusions(maxima80_extrusions, 640);
-    layout_extrusions(maxima120_extrusions, 760);
+        layout_extrusions(classic20_extrusions, 0);
+        layout_extrusions(classic28_extrusions, 90);
+        layout_extrusions(classic32_extrusions, 160);
+        layout_extrusions(classic35_extrusions, 240);
+        layout_extrusions(classic40_extrusions, 320);
+        layout_extrusions(classic80_extrusions, 400);
+        layout_extrusions(maxima40_extrusions, 480);
+        layout_extrusions(maxima60_extrusions, 560);
+        layout_extrusions(maxima80_extrusions, 640);
+        layout_extrusions(maxima120_extrusions, 760);
+        layout_extrusions(maxima160_extrusions, 880);
     }
 }
 
