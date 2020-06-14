@@ -17,10 +17,14 @@ module layout_extrusions(extrusions, y) {
 module test_octanorm() {
     // TODO: Group by extrusion width
     classic20_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic20") e];
+    classic25_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic25") e];
     classic28_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic28") e];
     classic32_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic32") e];
     classic35_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic35") e];
+    classic37_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic37") e];
     classic40_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic40") e];
+    classic50_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic50") e];
+    classic70_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic70") e];
     classic80_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic80") e];
     maxima40_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima40") e];
     maxima60_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima60") e];
