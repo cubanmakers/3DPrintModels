@@ -1,3 +1,6 @@
 [submodule "vendor/github.com/cubanmakers/Haeckel"]
 	path = vendor/github.com/cubanmakers/Haeckel
 	url = https://github.com/cubanmakers/Haeckel
+[submodule "docs"]
+	path = docs
+	url = https://github.com/cubanmakers/3DPrintModels.wiki
