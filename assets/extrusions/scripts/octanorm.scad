@@ -33,6 +33,12 @@ Z508 = ["octanorm", "classic175", "Z508", "",     "../octanorm/official/files/ca
 Z560 = ["octanorm", "classic175", "Z560", "",     "../octanorm/official/files/cad/Z 560.dxf", "Profil", 16, 175, 5000];
 Z600 = ["octanorm", "classic175", "Z600", "",     "../octanorm/official/files/cad/Z 600.dxf", "Profil", 16, 175, 5000];
 
+// Classic system hinged extrusions
+S250 = ["octanorm", "classic_hinged", "S250", "",     "../octanorm/official/files/cad/S 250.dxf", "Profil", 35, 16, 5000];
+S251 = ["octanorm", "classic_hinged", "S251", "",     "../octanorm/official/files/cad/S 251.dxf", "Profil", 16, 24, 5000];
+S252 = ["octanorm", "classic_hinged", "S252", "",     "../octanorm/official/files/cad/S 252.dxf", "Profil", 16, 25, 5000];
+S253 = ["octanorm", "classic_hinged", "S253", "",     "../octanorm/official/files/cad/S 253.dxf", undef, 40, 16, 5000];
+
 // MAXIMA system oval beams
 S6105 = ["octanorm", "maxima", "S6105", "",   "../octanorm/official/files/cad/S 6105.dxf", "Profil", 32, 73, 5000];
 
@@ -84,5 +90,5 @@ S333 = ["S333", "S 330", 28,  28,  17, ["S308"]];
 // S340 = ["S340", "S 340", 8,  20,  80, ["S308"], M4];
 // S340 = ["S333", "S 333", 8,  20,  80, ["S308"], M4];
 
-octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770, Z4400, M1068, M1082, M1320, M1025, M1091, M1340, M1052, Z300, Z303, Z308, Z310, Z402, Z400, Z460, Z110, Z160, Z508, Z560, Z600];
+octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770, Z4400, M1068, M1082, M1320, M1025, M1091, M1340, M1052, Z300, Z303, Z308, Z310, Z402, Z400, Z460, Z110, Z160, Z508, Z560, Z600, S250, S251, S252, S253];
 

@@ -31,6 +31,7 @@ module test_octanorm() {
     maxima80_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima80") e];
     maxima120_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima120") e];
     maxima160_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "maxima160") e];
+    classic_hinged_extrusions = [for (e = octanorm_extrusions) if (e[EXTIDX_SET] == "classic_hinged") e];
     union() {
         layout_extrusions(classic20_extrusions, 0);
         layout_extrusions(classic28_extrusions, 90);
@@ -43,6 +44,7 @@ module test_octanorm() {
         layout_extrusions(maxima80_extrusions, 640);
         layout_extrusions(maxima120_extrusions, 760);
         layout_extrusions(maxima160_extrusions, 880);
+        layout_extrusions(classic_hinged_extrusions, 1000);
     }
 }
 
