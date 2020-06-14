@@ -19,6 +19,20 @@ S308 = ["octanorm", "classic28", "S308", "",     "../octanorm/official/files/cad
 S408 = ["octanorm", "classic80", "S408", "",     "../octanorm/official/files/cad/S 408.dxf", "Profil", 80, 40, 5000];
 S500 = ["octanorm", "classic40", "S500", "",     "../octanorm/official/files/cad/S 500.dxf", "Profil", 40, 40, 5000];
 
+// Classic system beams
+Z300 = ["octanorm", "classic25", "Z300", "",     "../octanorm/official/files/cad/Z 300.dxf", "Profil", 16, 25, 5000];
+Z303 = ["octanorm", "classic32", "Z303", "",     "../octanorm/official/files/cad/Z 303.dxf", "Profil", 16, 32, 5000];
+Z308 = ["octanorm", "classic32", "Z308", "",     "../octanorm/official/files/cad/Z 308.dxf", "Profil", 16, 32, 5000];
+Z310 = ["octanorm", "classic37", "Z310", "",     "../octanorm/official/files/cad/Z 310.dxf", "Profil", 16, 37, 5000];
+Z402 = ["octanorm", "classic50", "Z402", "",     "../octanorm/official/files/cad/Z 402.dxf", "Profil", 16, 50, 5000];
+Z400 = ["octanorm", "classic50", "Z400", "",     "../octanorm/official/files/cad/Z 400.dxf", "Profil", 16, 50, 5000];
+Z460 = ["octanorm", "classic50", "Z460", "",     "../octanorm/official/files/cad/Z 460.dxf", "Profil", 16, 50, 5000];
+Z110 = ["octanorm", "classic70", "Z110", "",     "../octanorm/official/files/cad/Z 110.dxf", "Profil", 16, 70, 5000];
+Z160 = ["octanorm", "classic70", "Z160", "",     "../octanorm/official/files/cad/Z 160.dxf", "Profil", 16, 70, 5000];
+Z508 = ["octanorm", "classic175", "Z508", "",     "../octanorm/official/files/cad/Z 508.dxf", "Profil", 16, 175, 5000];
+Z560 = ["octanorm", "classic175", "Z560", "",     "../octanorm/official/files/cad/Z 560.dxf", "Profil", 16, 175, 5000];
+Z600 = ["octanorm", "classic175", "Z600", "",     "../octanorm/official/files/cad/Z 600.dxf", "Profil", 16, 175, 5000];
+
 // MAXIMA system oval beams
 S6105 = ["octanorm", "maxima", "S6105", "",   "../octanorm/official/files/cad/S 6105.dxf", "Profil", 32, 73, 5000];
 
@@ -70,5 +84,5 @@ S333 = ["S333", "S 330", 28,  28,  17, ["S308"]];
 // S340 = ["S340", "S 340", 8,  20,  80, ["S308"], M4];
 // S340 = ["S333", "S 333", 8,  20,  80, ["S308"], M4];
 
-octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770, Z4400, M1068, M1082, M1320, M1025, M1091, M1340, M1052];
+octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770, Z4400, M1068, M1082, M1320, M1025, M1091, M1340, M1052, Z300, Z303, Z308, Z310, Z402, Z400, Z460, Z110, Z160, Z508, Z560, Z600];
 
