@@ -43,6 +43,9 @@ M225 = ["octanorm", "maxima120", "M225", "",   "../octanorm/official/files/cad/M
 M226 = ["octanorm", "maxima120", "M226", "M225", "../octanorm/official/files/cad/M 225.dxf", "Profil", 120, 120, 6000];
 M230 = ["octanorm", "maxima120", "M230", "",   "../octanorm/official/files/cad/M 230.dxf", "Profil", 120, 120, 5000];
 
+// MAXIMA system round extrusions
+M1000 = ["octanorm", "maxima80", "M1222", "",   "../octanorm/official/files/cad/M 1222.dxf", "Profil", 80, 80, 5000];
+
 // Classic system end caps
 //                    F   W   H     L  E        
 S236 = ["S236", "S 236", 18,  1,   20, ["S206"]];
