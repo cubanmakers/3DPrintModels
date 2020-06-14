@@ -46,8 +46,18 @@ M230 = ["octanorm", "maxima120", "M230", "",   "../octanorm/official/files/cad/M
 // MAXIMA system round extrusions
 M1222 = ["octanorm", "maxima80", "M1222", "",   "../octanorm/official/files/cad/M 1222.dxf", "Profil", 80, 80, 5000];
 
-// MAXIMA system fla truss beams extrusions
+// MAXIMA system flat truss beams extrusions
 M770 = ["octanorm", "maxima40", "M770", "",   "../octanorm/official/files/cad/M 770.dxf", "Profil", 200, 40, 7000];
+
+// MAXIMA system rectangular extrusions
+Z4400 = ["octanorm", "maxima40", "Z4400", "",   "../octanorm/official/files/cad/Z 4400.dxf", "Profil", 16, 40, 5000];
+M1068 = ["octanorm", "maxima40", "M1068", "",   "../octanorm/official/files/cad/M 1068.dxf", "Profil", 40, 28, 5000];
+M1082 = ["octanorm", "maxima60", "M1082", "",   "../octanorm/official/files/cad/M 1082.dxf", "Profil", 60, 40, 6000w];
+M1320 = ["octanorm", "maxima80", "M1320", "",   "../octanorm/official/files/cad/M 1320.dxf", "Profil", 16, 80, 5000];
+M1025 = ["octanorm", "maxima80", "M1025", "",   "../octanorm/official/files/cad/M 1025.dxf", "Profil", 40, 80, 5000];
+M1091 = ["octanorm", "maxima80", "M1091", "",   "../octanorm/official/files/cad/M 1091.dxf", "Profil", 40, 80, 5000];
+M1340 = ["octanorm", "maxima120", "M1340", "",   "../octanorm/official/files/cad/M 1340.dxf", "Profil", 16, 120, 5000];
+M1052 = ["octanorm", "maxima160", "M1052", "",   "../octanorm/official/files/cad/M 1052.dxf", "Profil", 160, 80, 6930];
 
 // Classic system end caps
 //                    F   W   H     L  E        
@@ -60,5 +70,5 @@ S333 = ["S333", "S 330", 28,  28,  17, ["S308"]];
 // S340 = ["S340", "S 340", 8,  20,  80, ["S308"], M4];
 // S340 = ["S333", "S 333", 8,  20,  80, ["S308"], M4];
 
-octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770];
+octanorm_extrusions = [S100, S110, S108, S118, S128, S201, S203, S206, S302, S303, S308, S408, S500, S6105, M1000, M1001, M1002, M1003, M1005, M1007, M1009, S380, W908, M1010, M1020, M1018, M1019, M1105, M1063, M1070, M225, M226, M230, M1222, M770, Z4400, M1068, M1082, M1320, M1025, M1091, M1340, M1052];
 
