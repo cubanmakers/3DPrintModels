@@ -66,7 +66,7 @@ M770 = ["octanorm", "maxima40", "M770", "",   "../octanorm/official/files/cad/M 
 // MAXIMA system rectangular extrusions
 Z4400 = ["octanorm", "maxima40", "Z4400", "",   "../octanorm/official/files/cad/Z 4400.dxf", "Profil", 16, 40, 5000];
 M1068 = ["octanorm", "maxima40", "M1068", "",   "../octanorm/official/files/cad/M 1068.dxf", "Profil", 40, 28, 5000];
-M1082 = ["octanorm", "maxima60", "M1082", "",   "../octanorm/official/files/cad/M 1082.dxf", "Profil", 60, 40, 6000w];
+M1082 = ["octanorm", "maxima60", "M1082", "",   "../octanorm/official/files/cad/M 1082.dxf", "Profil", 60, 40, 6000];
 M1320 = ["octanorm", "maxima80", "M1320", "",   "../octanorm/official/files/cad/M 1320.dxf", "Profil", 16, 80, 5000];
 M1025 = ["octanorm", "maxima80", "M1025", "",   "../octanorm/official/files/cad/M 1025.dxf", "Profil", 40, 80, 5000];
 M1091 = ["octanorm", "maxima80", "M1091", "",   "../octanorm/official/files/cad/M 1091.dxf", "Profil", 40, 80, 5000];
