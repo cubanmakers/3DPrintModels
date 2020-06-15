@@ -9,5 +9,5 @@ include <test_tslot.scad>
 test_p40x70();
 translate([0, 100, 0])
 test_octanorm();
-translate([0, 1200, 0])
+translate([0, 1480, 0])
 test_tslot_nopscadlib();

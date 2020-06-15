@@ -3,7 +3,7 @@
 // Copyright (c) 2020 Cuban.Tech
 
 use <NopSCADlib/utils/layout.scad>
-include <build.scad>
+include <lib.scad>
 include <tslot.scad>
 
 module test_tslot_nopscadlib() {

@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2020 Cuban.Tech
 
-include <build.scad>
+include <lib.scad>
 
 module test_p40x70() {
   upright(P40X70, 80);
