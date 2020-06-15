@@ -1,12 +1,13 @@
-// Tests for the library of octanorm Al extrusions
-//
-// Based on https://grabcad.com/library/
+// Tests for the library of square Al extrusions
 //
 // Copyright (c) 2020 Cuban.Tech
 
-include <test_square.scad>
 include <test_octanorm.scad>
+include <test_square.scad>
+include <test_tslot.scad>
 
 test_p40x70();
 translate([0, 100, 0])
 test_octanorm();
+translate([0, 1200, 0])
+test_tslot_nopscadlib();
