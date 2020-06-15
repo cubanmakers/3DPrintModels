@@ -1,7 +1,5 @@
 // Tests for the library of octanorm Al extrusions
 //
-// Based on https://grabcad.com/library/
-//
 // Copyright (c) 2020 Cuban.Tech
 
 include <build.scad>
