@@ -10,7 +10,7 @@ include <octanorm.scad>
 
 module layout_extrusions(extrusions, y) {
     translate([0, y, 0])
-    layout([for (e = extrusions) extrusion_height(e)], 40)
+    layout([for (e = extrusions) upright_height(e)], 40)
     upright(extrusions[$i], 20 * $i + 40);
 }
 
