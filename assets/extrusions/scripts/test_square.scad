@@ -4,8 +4,8 @@
 //
 // Copyright (c) 2020 Cuban.Tech
 
-include <square.scad>
+include <build.scad>
 
 module test_p40x70() {
-  perfil_h(40, 70, 80, 3);
+  upright(P40X70, 80);
 }
