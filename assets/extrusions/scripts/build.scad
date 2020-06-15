@@ -3,9 +3,10 @@
 // Copyright (c) 2020 Cuban.Tech
 
 include <meta.scad>
-include <utils.scad>
 include <octanorm.scad>
 include <square.scad>
+include <tslot.scad>
+include <utils.scad>
 
 module upright(extrusion_type, length=undef) {
     default_length = extrusion_type[EXTIDX_LENGTH];
