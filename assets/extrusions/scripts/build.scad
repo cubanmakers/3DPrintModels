@@ -15,8 +15,10 @@ module upright(extrusion_type, length=undef) {
     color("lightgrey")
     if (dxf_data[0] != undef) {
         extrusion_from_file(extrusion_type[EXTIDX_DXF_PATH], l, extrusion_type[EXTIDX_DXF_LAYER]);
-    } else if (extrusion_type[0] == "square") {
+    } else if (extrusion_type[EXTIDX_SYSTEM] == "square") {
         render_square(extrusion_type, l);
+    } else if (extrusion_type[EXTIDX_SYSTEM] == "tslot" && extrusion_type[EXTIDX_SET] == "nopscadlib") {
+        render_tslot_nopscadlib(extrusion_type, l);
     }
 }
 
