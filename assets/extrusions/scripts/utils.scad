@@ -3,7 +3,6 @@
 // Copyright (c) 2020 Cuban.Tech
 
 module extrusion_from_file(file_path, length, layer=undef) {
-    color("lightgray")
     linear_extrude(length)
     import(file_path, layer=layer);
 }
