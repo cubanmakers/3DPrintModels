@@ -40,7 +40,7 @@ S252 = ["octanorm", "classic_hinged", "S252", "",     "../octanorm/official/file
 S253 = ["octanorm", "classic_hinged", "S253", "",     "../octanorm/official/files/cad/S 253.dxf", undef, 40, 16, 5000];
 
 // MAXIMA system oval beams
-S6105 = ["octanorm", "maxima", "S6105", "",   "../octanorm/official/files/cad/S 6105.dxf", "Profil", 32, 73, 5000];
+S6105 = ["octanorm", "maxima80", "S6105", "",   "../octanorm/official/files/cad/S 6105.dxf", "Profil", 32, 73, 5000];
 
 // MAXIMA system square extrusions
 M1000 = ["octanorm", "maxima40", "M1000", "",   "../octanorm/official/files/cad/M 1000.dxf", "Profil", 40, 40, 5000];
