@@ -19,9 +19,9 @@ The following tools might help in setting a Fablab up:
 
 - 3D printers
   * [Prusa i3](https://github.com/cubanmakers/3DPrintModels/wiki/Prusa_i3)
-    - [P35X70](https://github.com/cubanmakers/3DPrintModels/wiki/docs/3D-printer:-P40X70) a DIY alternative using Al extrusions easy to buy in Cuba
+    - [P35X70](https://github.com/cubanmakers/3DPrintModels/wiki/3D-printer:-P40X70) a DIY alternative using Al extrusions easy to buy in Cuba
     - [ANET A8 clone](https://github.com/cubanmakers/3DPrintModels/wiki/3D-printer:-ANET-A8-DIY.md) a DIY alternative using E2040 profiles, Marlin, and RAMPS
-    - [CoreXY octanorm](https://github.com/cubanmakers/3DPrintModels/wiki/ docs/3D-printer:-CoreXY-Octanorm.md) implements a CoreXY mechanical system using Octanorm extrusion profiles for the frame.
+    - [CoreXY octanorm](https://github.com/cubanmakers/3DPrintModels/wiki/3D-printer:-CoreXY-Octanorm.md) implements a CoreXY mechanical system using Octanorm extrusion profiles for the frame.
 
 ## Parts
 
