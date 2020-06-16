@@ -5,7 +5,7 @@
 include <meta.scad>
 include <octanorm.scad>
 include <square.scad>
-include <tslot.scad>
+include <tslot_nopscadlib.scad>
 include <utils.scad>
 
 module upright(extrusion_type, length=undef) {

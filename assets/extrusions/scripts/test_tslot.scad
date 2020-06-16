@@ -4,7 +4,7 @@
 
 use <NopSCADlib/utils/layout.scad>
 include <lib.scad>
-include <tslot.scad>
+include <tslot_nopscadlib.scad>
 
 module test_tslot_nopscadlib() {
     layout([for(e = tslot_extrusions) upright_width(e)], 10)
