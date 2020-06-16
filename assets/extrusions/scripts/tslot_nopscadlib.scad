@@ -28,7 +28,7 @@ TH3060  = nopscadlib_extrusion(E3060, true);
 TH4040  = nopscadlib_extrusion(E4040, true);
 TH4080  = nopscadlib_extrusion(E4080, true);
 
-tslot_extrusions = concat(
+tslot_nopscadlib_extrusions = concat(
     [for(e = extrusions) nopscadlib_extrusion(e)],
     [for(e = extrusions) if (extrusion_width(e) > 20) nopscadlib_extrusion(e, true)]
     );

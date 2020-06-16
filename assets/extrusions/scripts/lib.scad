@@ -5,6 +5,7 @@
 include <meta.scad>
 include <octanorm.scad>
 include <square.scad>
+include <tslot_bolts.scad>
 include <tslot_nopscadlib.scad>
 include <utils.scad>
 
@@ -20,6 +21,8 @@ module upright(extrusion_type, length=undef) {
         render_square(extrusion_type, l);
     } else if (extrusion_type[EXTIDX_SYSTEM] == "tslot" && extrusion_type[EXTIDX_SET] == "nopscadlib") {
         render_tslot_nopscadlib(extrusion_type, l);
+    } else if (extrusion_type[EXTIDX_SYSTEM] == "tslot" && extrusion_type[EXTIDX_SET] == "bolts") {
+        render_tslot_bolts(extrusion_type, l);
     }
 }
 
