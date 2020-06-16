@@ -37,6 +37,12 @@ The following DIY parts may also be manufactured for assemblying machines.
 
 See [project wiki](https://github.com/cubanmakers/3DPrintModels/wiki) for further details.
 
+## Dependencies
+
+Some of the features implemented in this project require the following libraries installed in `OPENSCADPATH`:
+
+- [NopSCADlib](https://github.com/nophead/NopSCADlib)
+
 ## Related projects
 
 - [DIY RAMPS](https://github.com/cubanmakers/ramps-diy) board.
