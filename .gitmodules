@@ -4,3 +4,6 @@
 [submodule "docs"]
 	path = docs
 	url = https://github.com/cubanmakers/3DPrintModels.wiki
+[submodule "vendor/github.com/cubanmakers/TronxyX1"]
+	path = vendor/github.com/cubanmakers/TronxyX1
+	url = https://github.com/cubanmakers/TronxyX1
