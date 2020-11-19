@@ -92,48 +92,64 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
         color("yellow")
         linear_extrude(t)
         // TODO: FPT
-        // TODO: FPT (PM30S-F)
-        // TODO: FPT (PM3535S/42S/42L-F)
-        // TODO: FPT (SMF/SMW/ST)
         // TODO: FPH
-        // TODO: FPH (PM30S-F)
-        // TODO: FPH (PM3535S/42S/42L-F)
-        // TODO: FPH (PM51L-F)
-        // TODO: FPH (SMF/SMW/ST)
         // TODO: FPL
-        if (is_fp_pm15s() || is_fp_s() || motor_def[0] == 51) {
-            difference() {
-                hull() {
-                    motor_front_center();
-                    move_copies(holes)
-                        circle(r=R);
-                }
-                move_copies(holes)
-                    circle(r=0.5*H);
-                if (is_fp_pm15s())
-                    zrot_clone(180)
-                        translate([0.5*P,-0.5*H])
-                            square([H,H]);
-            }
-        } else if (fp == "FPT" || fp == "FPH"){
-            if (B != 0) {
-                union() {
-                    motor_front_center();
-                    difference() {
-                        hull() {
-                            square([P,B], center=true);
-                            move_copies(holes)
-                                circle(r=R);
-                        }
+        difference() {
+            if (is_fp_pm15s() || is_fp_s() || motor_def[0] == 51) {
+                difference() {
+                    hull() {
+                        motor_front_center();
                         move_copies(holes)
-                            circle(r=0.5*H);
+                            circle(r=R);
                     }
+                    move_copies(holes)
+                        circle(r=0.5*H);
+                    if (is_fp_pm15s())
+                        zrot_clone(180)
+                            translate([0.5*P,-0.5*H])
+                                square([H,H]);
+                }
+            } else if (fp == "FPT" || fp == "FPH") {
+                difference() {
+                    union() {
+                        motor_front_center();
+                        if (B != 0) {
+                            hull() {
+                                square([P,B], center=true);
+                                move_copies(holes)
+                                    circle(r=R);
+                            }
+                        } else {
+                            union() {
+                                hull() {
+                                    difference() {
+                                        circle(r=0.5*D);
+                                        translate([-0.5*D,-0.3*D])
+                                            square([D,D]);
+                                    }
+                                    translate(holes[0])
+                                        circle(r=R);
+                                }
+                                hull() {
+                                    difference() {
+                                        circle(r=0.5*D);
+                                        translate([-0.5*D,-0.3*D])
+                                            square([D,D]);
+                                    }
+                                    translate(holes[1])
+                                        circle(r=R);
+                                }
+                            }
+                        }
+                    }
+                    move_copies(holes)
+                        circle(r=0.5*H);
                 }
             } else {
                 motor_front_center();
             }
-        } else {
-            motor_front_center();
+            move_copies(clamps_positions)
+                circle(r=0.5*H);
         }
         translate([0,0,t])
         color("white")
@@ -147,8 +163,6 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     module motor_front_center() {
         difference() {
             circle(r=0.5 * D);
-            move_copies(clamps_positions)
-                circle(r=0.5*H);
         }
     }
 
