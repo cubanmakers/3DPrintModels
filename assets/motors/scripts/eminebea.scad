@@ -11,8 +11,17 @@ include <BOSL2/std.scad>
 PCB_HOLE = 1.3;
 CLAMPS_CLEARANCE = 1.1;
 
-module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
+// FIXME: Move elsewhere
+module zrot_clone(angle) {
+    union() {
+        children();
+        rotate([0,0,angle])
+            children();
+    }
+}
 
+
+module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
 
     D = motor_def[0];
     L = motor_def[1];
@@ -27,7 +36,7 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     W = motor_def[10];
     l1 = shaft_length;
     l2 = motor_def[11];
-    P = (motor_def[0] == 20 && (pcb_angle == 30 || pcb_angle == 90 || pcb_angle == 150))? 28: (fp == "FPT")? motor_def[12]: (fp == "FPL")? motor_def[13]: (fp == "PM15S")? motor_def[14]: 0;
+    P = (motor_def[0] == 20 && (pcb_angle == 30 || pcb_angle == 90 || pcb_angle == 150))? 28: (fp == "FPT")? motor_def[12]: (fp == "FPL")? motor_def[13]: (motor_def[0] == 15)? motor_def[14]: 0;
     H = motor_def[15];
     R = motor_def[16];
     B = motor_def[17];
@@ -72,15 +81,41 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
         }
     }
 
+    function is_fp_pm15s() = motor_def[0] == 15;
+    function is_fp_s() = Q != 0;
+
+    holes = [[-0.5*P,0,0], [0.5*P,0,0]];
 
     module motor_front() {
         color("yellow")
         linear_extrude(t)
+        // TODO: FPT
+        // TODO: FPT (PM30S-F)
+        // TODO: FPT (PM3535S/42S/42L-F)
+        // TODO: FPT (SMF/SMW/ST)
+        // TODO: FPH
+        // TODO: FPH (PM30S-F)
+        // TODO: FPH (PM3535S/42S/42L-F)
+        // TODO: FPH (PM51L-F)
+        // TODO: FPH (SMF/SMW/ST)
+        // TODO: FPL
+        if (is_fp_pm15s() || is_fp_s() || motor_def[0] == 51) {
             difference() {
-                circle(r=0.5 * D);
-                move_copies(clamps_positions)
+                hull() {
+                    motor_front_center();
+                    move_copies(holes)
+                        circle(r=R);
+                }
+                move_copies(holes)
                     circle(r=0.5*H);
+                if (is_fp_pm15s())
+                    zrot_clone(180)
+                        translate([0.5*P,-0.5*H])
+                            square([H,H]);
             }
+        } else {
+            motor_front_center();
+        }
         translate([0,0,t])
         color("white")
         difference() {
@@ -90,13 +125,22 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
         }
     }
 
+    module motor_front_center() {
+        difference() {
+            circle(r=0.5 * D);
+            move_copies(clamps_positions)
+                circle(r=0.5*H);
+        }
+    }
+
     module motor_shaft() {
         color("darkgrey")
             cylinder(r=0.5*d1, l2 + L + l1);
     }
 
     module pcb_connector() {
-        // TODO: 
+        // TODO: PCB board atop connector
+        // TODO: PCB board for SMF/SMW/ST models
         color("white")
         difference(){
                 cube([2*C3, C2, C1], center=true);
@@ -115,7 +159,8 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     translate([0,0,-l1])
         motor_shaft();
     rotate([0,0,-pcb_angle])
-    translate([-0.5*D,0,0.5*L])
-        pcb_connector();
+    if (!is_fp_pm15s())
+        translate([-0.5*D,0,0.5*L])
+            pcb_connector();
 }
 
