@@ -9,7 +9,7 @@ include <3DPrintModels/assets/motors/scripts/eminebea.models.scad>
 include <BOSL2/std.scad>
 
 PCB_HOLE = 1.3;
-CLAMPS_SPACE = 1.1;
+CLAMPS_CLEARANCE = 1.1;
 
 module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
 
@@ -48,13 +48,18 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     //
     function screw_hole() = (fp == "FPH")? H: 0;
 
-    function clamps_positions() = regular_ngon(r=0.5*D - CLAMPS_CLEARANCE - 0.5*H, n=6);
+    function clamps_positions() = zrot(-pcb_angle, p=regular_ngon(r=0.5*D - CLAMPS_CLEARANCE - 0.5*H, n=6));
 
     module motor_front() {
+        holes = clamps_positions();
 
         color("yellow")
         linear_extrude(t)
-            circle(r=0.5 * D);
+            difference() {
+                circle(r=0.5 * D);
+                move_copies(holes)
+                    circle(r=0.5*H);
+            }
         translate([0,0,t])
         color("white")
         difference() {
