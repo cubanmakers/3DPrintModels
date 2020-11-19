@@ -22,7 +22,6 @@ module zrot_clone(angle) {
 
 
 module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
-
     D = motor_def[0];
     L = motor_def[1];
     d1 = motor_def[2];
@@ -36,7 +35,7 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     W = motor_def[10];
     l1 = shaft_length;
     l2 = motor_def[11];
-    P = (motor_def[0] == 20 && (pcb_angle == 30 || pcb_angle == 90 || pcb_angle == 150))? 28: (fp == "FPT")? motor_def[12]: (fp == "FPL")? motor_def[13]: (motor_def[0] == 15)? motor_def[14]: 0;
+    P = (motor_def[0] == 20 && (pcb_angle == 30 || pcb_angle == 90 || pcb_angle == 150))? 28: (fp == "FPT" || fp == "FPH")? motor_def[12]: (fp == "FPL")? motor_def[13]: (motor_def[0] == 15)? motor_def[14]: 0;
     H = motor_def[15];
     R = motor_def[16];
     B = motor_def[17];
@@ -45,6 +44,9 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     Q = motor_def[20];
     T = motor_def[21];
     assert(fp == "PM15S" || fp == "FPT" || fp == "FPH" || fp == "FPL", "Unknown front type");
+
+    echo("MINEBEA stepper motor", motor_def);
+    echo(str("Rendering D=", D, " P=", P, " R=", R, " H=", H));
 
     cp_radius = 0.5*D - CLAMPS_CLEARANCE - 0.5*H;
     clamps_positions = zrot(-pcb_angle, p=regular_ngon(r=cp_radius, n=6));
