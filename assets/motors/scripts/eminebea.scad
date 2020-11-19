@@ -98,11 +98,11 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     module pcb_connector() {
         color("white")
         difference(){
-                cube([C3, C2, C1], center=true);
+                cube([2*C3, C2, C1], center=true);
                 translate([0,0,0.5*(C1 - PCB_HOLE)])
-                    cube([C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+                    cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
                 translate([0,0,0.5 * (PCB_HOLE - C1)])
-                    cube([C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+                    cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
         }
     }
 
@@ -114,7 +114,7 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     translate([0,0,-l1])
         motor_shaft();
     rotate([0,0,-pcb_angle])
-    translate([-0.5*D - 0.5 * C3,0,0.5*L])
+    translate([-0.5*D,0,0.5*L])
         pcb_connector();
 }
 
