@@ -37,27 +37,48 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     T = motor_def[21];
     assert(fp == "PM15S" || fp == "FPT" || fp == "FPH" || fp == "FPL", "Unknown front type");
 
+    cp_radius = 0.5*D - CLAMPS_CLEARANCE - 0.5*H;
+    clamps_positions = zrot(-pcb_angle, p=regular_ngon(r=cp_radius, n=6));
+
     module motor_body() {
-        color("gray")
-        difference() {
-            cylinder(r=0.5 * D, h=L-t);
-            motor_shaft();
+        h = L-2*t;
+        color("white")
+        union() {
+            difference() {
+                cylinder(r=0.5 * D - t, h=h);
+                motor_shaft();
+            }
+            translate([0,0,h]) {
+                cylinder(r=cp_radius - 0.5 * H, h=t + 0.3*l2);
+                cylinder(r=0.5*d2, h=t + 0.5*l2);
+                move_copies(clamps_positions)
+                    cylinder(r=0.5 * H, h=t + 0.3 * l2);
+            }
+        }
+        color("grey") {
+            linear_extrude(0.5 * h - t)
+            difference() {
+                circle(r=0.5 * D);
+                circle(r=0.5 * D - t);
+            }
+            translate([0,0,0.5*L-t])
+            difference() {
+                cylinder(r=0.5 * D, h=0.5 * L);
+                translate([0,0,-0.1])
+                    cylinder(r=0.5 * D - t, h=0.5 * L - t + 0.1);
+                move_copies(clamps_positions)
+                    cylinder(r=0.5*H, h=0.5*L+0.1);
+            }
         }
     }
 
-    //
-    function screw_hole() = (fp == "FPH")? H: 0;
-
-    function clamps_positions() = zrot(-pcb_angle, p=regular_ngon(r=0.5*D - CLAMPS_CLEARANCE - 0.5*H, n=6));
 
     module motor_front() {
-        holes = clamps_positions();
-
         color("yellow")
         linear_extrude(t)
             difference() {
                 circle(r=0.5 * D);
-                move_copies(holes)
+                move_copies(clamps_positions)
                     circle(r=0.5*H);
             }
         translate([0,0,t])
