@@ -49,7 +49,7 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
                 motor_shaft();
             }
             translate([0,0,h]) {
-                cylinder(r=cp_radius - 0.5 * H, h=t + 0.3*l2);
+                cylinder(r=cp_radius - 0.5 * H - t, h=t + 0.3*l2);
                 cylinder(r=0.5*d2, h=t + 0.5*l2);
                 move_copies(clamps_positions)
                     cylinder(r=0.5 * H, h=t + 0.3 * l2);
@@ -96,6 +96,7 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     }
 
     module pcb_connector() {
+        // TODO: 
         color("white")
         difference(){
                 cube([2*C3, C2, C1], center=true);
