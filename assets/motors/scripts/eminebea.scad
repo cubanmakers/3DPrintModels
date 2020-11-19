@@ -115,6 +115,23 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
                         translate([0.5*P,-0.5*H])
                             square([H,H]);
             }
+        } else if (fp == "FPT" || fp == "FPH"){
+            if (B != 0) {
+                union() {
+                    motor_front_center();
+                    difference() {
+                        hull() {
+                            square([P,B], center=true);
+                            move_copies(holes)
+                                circle(r=R);
+                        }
+                        move_copies(holes)
+                            circle(r=0.5*H);
+                    }
+                }
+            } else {
+                motor_front_center();
+            }
         } else {
             motor_front_center();
         }
