@@ -91,8 +91,6 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     module motor_front() {
         color("yellow")
         linear_extrude(t)
-        // TODO: FPT
-        // TODO: FPH
         // TODO: FPL
         difference() {
             if (is_fp_pm15s() || is_fp_s() || motor_def[0] == 51) {
@@ -144,6 +142,33 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
                     }
                     move_copies(holes)
                         circle(r=0.5*H);
+                }
+            } else if (fp == "FPL") {
+                corner_points_left = [0.5*[P*cos(0.5*alpha), P*sin(0.5*alpha)], 0.5*[P*cos(0.5*alpha), -P*sin(0.5*alpha)]];
+                difference() {
+                    union() {
+                        motor_front_center();
+                        hull() {
+                            zrot_clone(180) {
+                                move_copies(corner_points_left)
+                                    circle(r=0.5*(A-P));
+                                arc(r=0.5*A, angle=[-0.5*alpha,0.5*alpha]);
+                            }
+                            difference() {
+                                circle(r=0.5*D);
+                                translate([-0.5*D,0])
+                                    square([D,D]);
+                            }
+                        }
+                    }
+                    zrot_clone(180) {
+                        move_copies(corner_points_left)
+                            circle(r=0.5*H);
+                        difference() {
+                            arc(r=0.5*(P+H), angle=[-0.5*alpha,0.5*alpha], wedge=true);
+                            arc(r=0.5*(P-H), angle=[-0.5*alpha,0.5*alpha], wedge=true);
+                        }
+                    }
                 }
             } else {
                 motor_front_center();
