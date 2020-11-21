@@ -7,7 +7,10 @@
 
 include <3DPrintModels/assets/motors/scripts/eminebea.models.scad>
 include <BOSL2/std.scad>
+include <NopSCADlib/vitamins/pin_header.scad>
+include <NopSCADlib/vitamins/pin_headers.scad>
 
+PCB_WIDTH = 1.5;
 PCB_HOLE = 1.3;
 CLAMPS_CLEARANCE = 1.1;
 
@@ -19,7 +22,6 @@ module zrot_clone(angle) {
             children();
     }
 }
-
 
 module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     D = motor_def[0];
@@ -196,17 +198,32 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
             cylinder(r=0.5*d1, l2 + L + l1);
     }
 
+    function has_pcb_only() = is_fp_s() || motor_def[0] == 51;
+
+    // FIXME: Correct JST connectors
     module pcb_connector() {
-        // TODO: PCB board atop connector
+        jst_size_y = 5.75;
+        // TODO: PCB board under PCB for -F models
         // TODO: PCB board for SMF/SMW/ST models
-        color("white")
-        difference(){
-                cube([2*C3, C2, C1], center=true);
-                translate([0,0,0.5*(C1 - PCB_HOLE)])
-                    cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
-                translate([0,0,0.5 * (PCB_HOLE - C1)])
-                    cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+        if (has_pcb_only()) {
+        } else {
+            color("white")
+            difference(){
+                    cube([2*C3, C2, C1], center=true);
+                    translate([0,0,0.5*(C1 - PCB_HOLE)])
+                        cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+                    translate([0,0,0.5 * (PCB_HOLE - C1)])
+                        cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+            }
         }
+        color("green") {
+            translate([-C3 - 0.5*PCB_WIDTH,0,0.5*jst_size_y])
+                cube([PCB_WIDTH, C2, C1 + jst_size_y],center=true);
+        }
+        translate([-C3-PCB_WIDTH,0,0.5*C1])
+            rotate([-90,0,0])
+            rotate([0,-90,0])
+            jst_xh_header(jst_xh_header, (motor_def[0] < 42)? 5:4, right_angle = true, colour = "white", pin_colour = "gold");
     }
 
     translate([0,0,t]) {
