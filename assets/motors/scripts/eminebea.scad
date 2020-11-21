@@ -237,9 +237,16 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
                 cube([PCB_WIDTH, C2, C1 + ((has_pcb_only())? 0:jst_size_y)],center=true);
             }
             if (has_pcb_only()) {
-                translate([-0.5*PCB_WIDTH,0.5*C2 - 1.5 * hdr_pitch(minebea_pcb_cables),0])
-                    rotate([0,-90,0])
-                    pin_header(minebea_pcb_cables, jst_pins, 1, colour = "white");
+                if (is_fp_s()) {
+                    translate([-0.5*PCB_WIDTH,0.5*C2 - 1.5 * hdr_pitch(minebea_pcb_cables),0])
+                        rotate([0,-90,0])
+                        pin_header(minebea_pcb_cables, jst_pins, 1, colour = "white");
+                } else {
+                    translate([.5*PCB_WIDTH,0.5*C2 - 0.5 * hdr_pitch(minebea_pcb_cables) - hdr_socket_depth(minebea_pcb_cables),0])
+                        rotate([0,90,0])
+                        rotate([0,0,180])
+                        jst_xh_header(minebea_pcb_cables, jst_pins, 1, colour = "white");
+                }
             } else {
                 translate([-PCB_WIDTH,0,0])
                     rotate([-90,0,0])
