@@ -181,8 +181,10 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
             } else {
                 motor_front_center();
             }
-            move_copies(clamps_positions)
-                circle(r=0.5*H);
+            if (has_clamps) {
+                move_copies(clamps_positions)
+                    circle(r=0.5*H);
+            }
         }
         translate([0,0,t])
         color("white")
