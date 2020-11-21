@@ -23,6 +23,8 @@ module zrot_clone(angle) {
     }
 }
 
+minebea_pcb_cables = ["MINEBEA PCB", 2, 10, 2*PCB_WIDTH, 0.3, "gold", "grey20", 8.5];
+
 module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     D = motor_def[0];
     L = motor_def[1];
@@ -45,6 +47,10 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
     A = motor_def[19];
     Q = motor_def[20];
     T = motor_def[21];
+    C2_1 = motor_def[22];
+    C1_1 = motor_def[23];
+    jst_pins = motor_def[24];
+    has_clamps = motor_def[25];
     assert(fp == "PM15S" || fp == "FPT" || fp == "FPH" || fp == "FPL", "Unknown front type");
 
     echo("MINEBEA stepper motor", motor_def);
@@ -200,30 +206,45 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
 
     function has_pcb_only() = is_fp_s() || motor_def[0] == 51;
 
+    module pcb_base(C1, C2, C3, pcb_only=false) {
+        difference(){
+                translate([(pcb_only? -0.5*C3:0),0,0])
+                    cube([(pcb_only? 1:2) * C3, C2, C1], center=true);
+                translate([0,0,0.5*(C1 - PCB_HOLE)])
+                    cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+                translate([0,0,0.5 * (PCB_HOLE - C1)])
+                    cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+        }
+    }
+
     // FIXME: Correct JST connectors
     module pcb_connector() {
         jst_size_y = 5.75;
-        // TODO: PCB board under PCB for -F models
+        // TODO: JST connector under PCB for -F models
         // TODO: PCB board for SMF/SMW/ST models
         if (has_pcb_only()) {
+            color("black")
+            translate([0,0,C1_1])
+                pcb_base(C1, 2*(C2 - C2_1), C3, pcb_only=true);
         } else {
             color("white")
-            difference(){
-                    cube([2*C3, C2, C1], center=true);
-                    translate([0,0,0.5*(C1 - PCB_HOLE)])
-                        cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
-                    translate([0,0,0.5 * (PCB_HOLE - C1)])
-                        cube([2*C3+0.1, C2 - PCB_HOLE, PCB_HOLE + 0.1], center=true);
+            pcb_base(C1, C2, C3);
+        }
+        translate([-C3 - 0.5*PCB_WIDTH,(C2_1 != 0)? (C2_1 - 0.5*C2):0,C1_1]) {
+            color("green") {
+                cube([PCB_WIDTH, C2, C1 + ((has_pcb_only())? 0:jst_size_y)],center=true);
+            }
+            if (has_pcb_only()) {
+                translate([-0.5*PCB_WIDTH,0.5*C2 - 1.5 * hdr_pitch(minebea_pcb_cables),0])
+                    rotate([0,-90,0])
+                    pin_header(minebea_pcb_cables, jst_pins, 1, colour = "white");
+            } else {
+                translate([-C3-PCB_WIDTH,0,0])
+                    rotate([-90,0,0])
+                    rotate([0,-90,0])
+                    jst_xh_header(jst_xh_header, jst_pins, right_angle = true, colour = "white", pin_colour = "gold");
             }
         }
-        color("green") {
-            translate([-C3 - 0.5*PCB_WIDTH,0,0.5*jst_size_y])
-                cube([PCB_WIDTH, C2, C1 + jst_size_y],center=true);
-        }
-        translate([-C3-PCB_WIDTH,0,0.5*C1])
-            rotate([-90,0,0])
-            rotate([0,-90,0])
-            jst_xh_header(jst_xh_header, (motor_def[0] < 42)? 5:4, right_angle = true, colour = "white", pin_colour = "gold");
     }
 
     translate([0,0,t]) {
