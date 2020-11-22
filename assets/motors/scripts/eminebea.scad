@@ -206,7 +206,7 @@ module eminebea_stepper(motor_def, fp, shaft_length, pcb_angle=30) {
             cylinder(r=0.5*d1, l2 + L + l1);
     }
 
-    function has_pcb_only() = is_fp_s() || motor_def[0] == 51;
+    function has_pcb_only() = is_fp_s() || motor_def[0] == 51 || motor_def[0] == 30;
 
     module pcb_base(C1, C2, C3, pcb_only=false) {
         difference(){
