@@ -45,19 +45,25 @@ module microswitch_ex(type) { //! Draw specified microswitch
                             union() {
                                 linear_extrude(leg.x, center = true)
                                     square([leg.z, leg.y], center = true);
-                                translate([leg[4][0], leg[4][1], 0])
+                                translate(leg[4])
                                     sphere(d = leg[3]);
                             }
                         } else {
                         //** end patch
-                            linear_extrude(leg.x, center = true)
-                                difference() {
-                                    square([leg.z, leg.y], center = true);
+                            difference() {
+                                linear_extrude(leg.x, center = true)
+                                    difference() {
+                                        square([leg.z, leg.y], center = true);
 
-                                    if(leg[3])
-                                        translate(leg[4])
-                                            circle(d = leg[3]);
-                                }
+                                        if(leg[3] && leg.z >= leg.x)
+                                            translate(leg[4])
+                                                circle(d = leg[3]);
+                                    }
+                                if (leg.x > leg.z)
+                                    translate(leg[4])
+                                    rotate([0,90,0])
+                                        cylinder(d=leg[3], h=leg.z+0.1, center=true);
+                            }
                         //** begin patch
                         }
                         //** end patch
