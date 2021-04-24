@@ -40,7 +40,6 @@ module microswitch_ex(type) { //! Draw specified microswitch
 
                 if(vertical)
                     rotate([0, 90, 0])
-                        //** begin patch
                         if (leg[3] < 0) {
                             union() {
                                 linear_extrude(leg.x, center = true)
@@ -49,7 +48,6 @@ module microswitch_ex(type) { //! Draw specified microswitch
                                     sphere(d = leg[3]);
                             }
                         } else {
-                        //** end patch
                             difference() {
                                 linear_extrude(leg.x, center = true)
                                     difference() {
@@ -59,30 +57,36 @@ module microswitch_ex(type) { //! Draw specified microswitch
                                             translate(leg[4])
                                                 circle(d = leg[3]);
                                     }
-                                if (leg.x > leg.z)
+                                if (leg[3] && leg.x > leg.z)
                                     translate(leg[4])
                                     rotate([0,90,0])
                                         cylinder(d=leg[3], h=leg.z+0.1, center=true);
                             }
-                        //** begin patch
                         }
-                        //** end patch
                 else
-                    rotate([90, 0, 0])
-                        linear_extrude(leg.y, center = true)
-                            difference() {
-                                square([leg.x, leg.z], center = true);
-
-                                if(leg[3])
-                                    translate(leg[4])
-                                        circle(d = leg[3]);
+                    difference() {
+                        union() {
+                            rotate([90, 0, 0])
+                                linear_extrude(leg.y, center = true)
+                                    difference() {
+                                        square([leg.x, leg.z], center = true);
+        
+                                        if(leg[3] && leg.z >= leg.x)
+                                            translate(leg[4])
+                                                circle(d = leg[3]);
+                                    }
+                            if(!vertical && pos.y < -microswitch_width(type) / 2) {
+                                gap = -microswitch_width(type) / 2 - pos.y;
+                                translate([-leg.x / 2 + leg.y / 2, gap / 2])
+                                    cube([leg.y, gap, leg.z], center = true);
                             }
-
-                if(!vertical && pos.y < -microswitch_width(type) / 2) {
-                    gap = -microswitch_width(type) / 2 - pos.y;
-                    translate([-leg.x / 2 + leg.y / 2, gap / 2])
-                        cube([leg.y, gap, leg.z], center = true);
-                }
+                        }
+                        rotate([90, 0, 0])
+                            if (leg[3] && leg.x > leg.z)
+                                translate(leg[4])
+                                rotate([90,0,0])
+                                    cylinder(d=leg[3], h=leg.z+0.1, center=true);
+                    }
             }
 }
 
