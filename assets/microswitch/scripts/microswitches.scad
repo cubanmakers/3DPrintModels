@@ -11,7 +11,7 @@ include <NopSCADlib/vitamins/microswitches.scad>
 
 d2f_t_pcb  = [0.9,  3.5, 0.4, 0];
 d2f_t_t    = [0.9,  3.4, 0.4, -1.25, [0, 0.1]];
-d2f_t_d3   = [1.2,  3.5, 0.4, 1.2, [0,-2.6]];
+d2f_t_d3   = [2.2,  3.5, 0.4, 1.2, [0,-0.85]];
 d2f_t_d    = [1.6,  0.9, 0.4, 0.8, [0,0.45]];
 
 // OMRON D2F microswitches
