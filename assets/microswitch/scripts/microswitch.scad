@@ -8,6 +8,9 @@
 include <NopSCADlib/utils/core/core.scad>
 include <NopSCADlib/vitamins/microswitches.scad>
 
+function microswitch_leg_rotation(leg) = let (v = leg[5]) (v == undef)? 0:v;
+function microswitch_leg_offset(leg)   = let (v = leg[6]) (v == undef)? [0,0,0]:v;
+
 
 module microswitch_ex(type) { //! Draw specified microswitch
     vitamin(str("microswitch_ex(", type[0], "): Microswitch ", type[1]));
@@ -38,6 +41,8 @@ module microswitch_ex(type) { //! Draw specified microswitch
                 leg = microswitch_leg(type);
                 vertical = leg.y > leg.x;
 
+                translate(microswitch_leg_offset(leg))
+                rotate([0,microswitch_leg_rotation(leg), 0])
                 if(vertical)
                     rotate([0, 90, 0])
                         if (leg[3] < 0) {
@@ -75,7 +80,7 @@ module microswitch_ex(type) { //! Draw specified microswitch
                                             translate(leg[4])
                                                 circle(d = leg[3]);
                                     }
-                            if(!vertical && pos.y < -microswitch_width(type) / 2) {
+                            if(pos.y < -microswitch_width(type) / 2) {
                                 gap = -microswitch_width(type) / 2 - pos.y;
                                 translate([-leg.x / 2 + leg.y / 2, gap / 2])
                                     cube([leg.y, gap, leg.z], center = true);
